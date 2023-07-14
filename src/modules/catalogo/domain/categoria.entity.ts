@@ -1,4 +1,5 @@
 import { CreateCategoryProps, ICategoria } from "./categoria.types";
+import { Catego } from "";
 
 export class Categoria implements ICategoria {
   private _id: string;
