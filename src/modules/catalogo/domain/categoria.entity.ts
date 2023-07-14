@@ -1,13 +1,26 @@
-import { CreateCategoryProps, ICategoria } from "./categoria.types";
-import { Catego } from "";
+import { ICategoria, CreateCategoryProps } from "../domain/categoria.types";
+import {
+  NomeCategoriaNuloOuIndefinido,
+  NomeCategoriaTamanhoMaximoInvalido,
+  NomeCategoriaTamanhoMinimoInvalido,
+} from "../../../shared/domain/categoria.exception";
 
-export class Categoria implements ICategoria {
+class Categoria implements ICategoria {
+  ///////////////////////
+  //Atributos de Classe//
+  ///////////////////////
+
   private _id: string;
   private _nome: string;
+
+  ///////////////
+  //Gets e Sets//
+  ///////////////
 
   public get id(): string {
     return this._id;
   }
+
   private set id(value: string) {
     this._id = value;
   }
@@ -15,33 +28,41 @@ export class Categoria implements ICategoria {
   public get nome(): string {
     return this._nome;
   }
+
   private set nome(value: string) {
     if (value === null || value === undefined) {
-      throw new Error(`${value} é nulo ou indefinido.`);
+      throw new NomeCategoriaNuloOuIndefinido();
     }
+
     if (value.trim().length < 3) {
-      throw new Error(
-        `O nome da categoria não possuí um tamanho mínimo válido.`
-      );
+      throw new NomeCategoriaTamanhoMinimoInvalido();
     }
+
     if (value.trim().length > 50) {
-      throw new Error(
-        `O nome da categoria não possuí um tamanho máximo válido.`
-      );
-    } else {
-      this._nome = value;
-      console.log(`"${value}" inserido com sucesso.`);
+      throw new NomeCategoriaTamanhoMaximoInvalido();
     }
+
+    this._nome = value;
   }
 
-  private constructor(props: ICategoria) {
-    this.id = props.id;
-    this.nome = props.nome;
+  //////////////
+  //Construtor//
+  //////////////
+
+  private constructor(categoria: ICategoria) {
+    this.id = categoria.id;
+    this.nome = categoria.nome;
   }
 
-  public static create(props: CreateCategoryProps): Categoria {
-    let id = "123456";
+  /////////////////////////
+  //Static Factory Method//
+  /////////////////////////
+
+  public static criar(props: CreateCategoryProps): Categoria {
+    let id = "12345"; //Refatorar para gerar id com UUID
     let { nome } = props;
     return new Categoria({ id, nome });
   }
 }
+
+export { Categoria };
