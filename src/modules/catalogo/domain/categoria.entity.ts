@@ -9,6 +9,7 @@ import {
   NomeCategoriaTamanhoMinimoInvalido,
 } from "../../../shared/domain/categoria.exception";
 import { Entity } from "../../../shared/domain/entity";
+import { CategoriaMap } from "../mapper/categoria.map";
 
 class Categoria extends Entity<ICategoria> implements ICategoria {
   private _nome: string;
@@ -45,6 +46,10 @@ class Categoria extends Entity<ICategoria> implements ICategoria {
 
   public static recuperar(props: RecuperarCategoriaProps): Categoria {
     return new Categoria(props);
+  }
+
+  public toDTO(): ICategoria {
+    return CategoriaMap.toDTO(this);
   }
 
   // public serialize() {
