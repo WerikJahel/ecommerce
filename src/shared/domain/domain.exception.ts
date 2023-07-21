@@ -7,4 +7,14 @@ class DomainException extends Error {
   }
 }
 
-export { DomainException };
+class IDEntityUUIDInvalid extends DomainException {
+  public constructor(
+    message: string = "⚠️ O ID da entidade é um UUID inválido."
+  ) {
+    super(message);
+    this.name = "IDEntityUUIDInvalid";
+    this.message = message;
+  }
+}
+
+export { DomainException, IDEntityUUIDInvalid };

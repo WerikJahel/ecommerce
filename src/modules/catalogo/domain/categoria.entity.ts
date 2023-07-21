@@ -1,29 +1,17 @@
-import { ICategoria, CreateCategoryProps } from "../domain/categoria.types";
+import {
+  ICategoria,
+  CreateCategoryProps,
+  RecuperarCategoriaProps,
+} from "../domain/categoria.types";
 import {
   NomeCategoriaNuloOuIndefinido,
   NomeCategoriaTamanhoMaximoInvalido,
   NomeCategoriaTamanhoMinimoInvalido,
 } from "../../../shared/domain/categoria.exception";
+import { Entity } from "../../../shared/domain/entity";
 
-class Categoria implements ICategoria {
-  ///////////////////////
-  //Atributos de Classe//
-  ///////////////////////
-
-  private _id: string;
+class Categoria extends Entity<ICategoria> implements ICategoria {
   private _nome: string;
-
-  ///////////////
-  //Gets e Sets//
-  ///////////////
-
-  public get id(): string {
-    return this._id;
-  }
-
-  private set id(value: string) {
-    this._id = value;
-  }
 
   public get nome(): string {
     return this._nome;
@@ -45,24 +33,23 @@ class Categoria implements ICategoria {
     this._nome = value;
   }
 
-  //////////////
-  //Construtor//
-  //////////////
-
   private constructor(categoria: ICategoria) {
-    this.id = categoria.id;
+    super(categoria.id);
     this.nome = categoria.nome;
   }
 
-  /////////////////////////
-  //Static Factory Method//
-  /////////////////////////
-
   public static criar(props: CreateCategoryProps): Categoria {
-    let id = "12345"; //Refatorar para gerar id com UUID
     let { nome } = props;
-    return new Categoria({ id, nome });
+    return new Categoria({ nome });
   }
+
+  public static recuperar(props: RecuperarCategoriaProps): Categoria {
+    return new Categoria(props);
+  }
+
+  // public serialize() {
+  //   return JSON.stringify(this);
+  // }
 }
 
 export { Categoria };
