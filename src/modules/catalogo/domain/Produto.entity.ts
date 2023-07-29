@@ -1,8 +1,17 @@
-import { NomeCategoriaNuloOuIndefinido, NomeCategoriaTamanhoMaximoInvalido, NomeCategoriaTamanhoMinimoInvalido } from "../../../shared/domain/categoria.exception";
+import {
+  CategoriaProdutoQuantidadeMaximaInvalida,
+  CategoriaProdutoQuantidadeMinimaInvalida,
+  DescricaoProdutoTamanhoMaximoInvalido,
+  DescricaoProdutoTamanhoMinimoInvalido,
+  NomeProdutoNuloOuIndefinido,
+  NomeProdutoTamanhoMaximoInvalido,
+  NomeProdutoTamanhoMinimoInvalido,
+  ValorProdutoMinimoInvalido
+} from "../../../shared/domain/produto.exception";
 import { Entity } from "../../../shared/domain/entity";
 import { ProdutoMap } from "../mapper/produto.map";
 import { Categoria } from "./categoria.entity";
-import { IProduto, ProdutoProps, RecuperarProdutoProps } from "./Produto.types";
+import { IProduto, ProdutoProps, RecuperarProdutoProps } from "./produto.types";
 
 class Produto extends Entity<IProduto> implements IProduto {
   private _nome: string;
@@ -15,15 +24,15 @@ class Produto extends Entity<IProduto> implements IProduto {
   }
   private set nome(value: string) {
     if (value === null || value === undefined) {
-      throw new NomeCategoriaNuloOuIndefinido();
+      throw new NomeProdutoNuloOuIndefinido();
     }
 
     if (value.trim().length < 5) {
-      throw new NomeCategoriaTamanhoMinimoInvalido();
+      throw new NomeProdutoTamanhoMinimoInvalido();
     }
 
     if (value.trim().length > 50) {
-      throw new NomeCategoriaTamanhoMaximoInvalido();
+      throw new NomeProdutoTamanhoMaximoInvalido();
     }
 
     this._nome = value;
@@ -34,11 +43,11 @@ class Produto extends Entity<IProduto> implements IProduto {
   }
   private set descricao(value: string) {
     if (value.length < 10) { //.trim() serve para retirar os espaços da string
-      throw new NomeCategoriaTamanhoMinimoInvalido();
+      throw new DescricaoProdutoTamanhoMinimoInvalido();
     }
 
     if (value.length > 200) {
-      throw new NomeCategoriaTamanhoMaximoInvalido();
+      throw new DescricaoProdutoTamanhoMaximoInvalido();
     }
 
     this._descricao = value;
@@ -48,6 +57,10 @@ class Produto extends Entity<IProduto> implements IProduto {
     return this._valor;
   }
   private set valor(value: number) {
+    if (value < 0) { //.trim() serve para retirar os espaços da string
+      throw new ValorProdutoMinimoInvalido();
+    }
+
     this._valor = value;
   }
 
@@ -56,11 +69,11 @@ class Produto extends Entity<IProduto> implements IProduto {
   }
   private set categoria(value: Categoria[]) {
     if (value.length < 1) { //.trim() serve para retirar os espaços da string
-      throw new NomeCategoriaTamanhoMinimoInvalido();
+      throw new CategoriaProdutoQuantidadeMinimaInvalida();
     }
 
     if (value.length > 3) {
-      throw new NomeCategoriaTamanhoMaximoInvalido();
+      throw new CategoriaProdutoQuantidadeMaximaInvalida();
     }
 
     this._categoria = value;

@@ -1,6 +1,6 @@
 
 import { Produto } from "../domain/Produto.entity";
-import { IProduto, RecuperarProdutoProps } from "../domain/Produto.types";
+import { IProduto, RecuperarProdutoProps } from "../domain/produto.types";
 
 class ProdutoMap {
   public static toDTO(produto: Produto): IProduto {
