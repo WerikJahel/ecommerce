@@ -7,8 +7,8 @@ import {
 import {
   NomeCategoriaTamanhoMaximoInvalido,
   NomeCategoriaTamanhoMinimoInvalido,
-} from "../../../shared/domain/categoria.exception";
-import { IDEntityUUIDInvalid } from "../../../shared/domain/domain.exception";
+} from "./categoria.exception";
+import { IDEntityUUIDInvalid } from "../../../../shared/domain/domain.exception";
 
 describe("Entidade de Dominio de Categoria", () => {
   test("Deve criar um Categoria válida", async () => {

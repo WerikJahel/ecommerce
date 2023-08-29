@@ -7,10 +7,10 @@ import {
   NomeProdutoTamanhoMaximoInvalido,
   NomeProdutoTamanhoMinimoInvalido,
   ValorProdutoMinimoInvalido
-} from "../../../shared/domain/produto.exception";
-import { Entity } from "../../../shared/domain/entity";
-import { ProdutoMap } from "../mapper/produto.map";
-import { Categoria } from "./categoria.entity";
+} from "./produto.exception";
+import { Entity } from "../../../../shared/domain/entity";
+import { ProdutoMap } from "../../mapper/produto.map";
+import { Categoria } from "../categoria/categoria.entity";
 import { IProduto, ProdutoProps, RecuperarProdutoProps } from "./produto.types";
 
 class Produto extends Entity<IProduto> implements IProduto {
@@ -69,11 +69,15 @@ class Produto extends Entity<IProduto> implements IProduto {
   }
   private set categoria(value: Categoria[]) {
     if (value.length < 1) { //.trim() serve para retirar os espaços da string
+
       throw new CategoriaProdutoQuantidadeMinimaInvalida();
+
     }
 
     if (value.length > 3) {
+
       throw new CategoriaProdutoQuantidadeMaximaInvalida();
+
     }
 
     this._categoria = value;

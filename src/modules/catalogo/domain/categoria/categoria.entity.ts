@@ -2,14 +2,14 @@ import {
   ICategoria,
   CreateCategoryProps,
   RecuperarCategoriaProps,
-} from "../domain/categoria.types";
+} from "./categoria.types";
 import {
   NomeCategoriaNuloOuIndefinido,
   NomeCategoriaTamanhoMaximoInvalido,
   NomeCategoriaTamanhoMinimoInvalido,
-} from "../../../shared/domain/categoria.exception";
-import { Entity } from "../../../shared/domain/entity";
-import { CategoriaMap } from "../mapper/categoria.map";
+} from "./categoria.exception";
+import { Entity } from "../../../../shared/domain/entity";
+import { CategoriaMap } from "../../mapper/categoria.map";
 
 class Categoria extends Entity<ICategoria> implements ICategoria {
   private _nome: string;

@@ -1,6 +1,6 @@
 
-import { Produto } from "../domain/Produto.entity";
-import { IProduto, RecuperarProdutoProps } from "../domain/produto.types";
+import { Produto } from "../domain/produto/Produto.entity";
+import { IProduto, RecuperarProdutoProps } from "../domain/produto/produto.types";
 
 class ProdutoMap {
   public static toDTO(produto: Produto): IProduto {
@@ -19,3 +19,4 @@ class ProdutoMap {
 }
 
 export { ProdutoMap };
+
