@@ -8,6 +8,9 @@
     "test:run": "vitest run",
     "test:ui": "vitest --ui"
   },
+  "prisma": {
+    "screma": "./src/main/infra/database/orm/prisma/schema.prisma"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
