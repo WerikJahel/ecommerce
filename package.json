@@ -9,7 +9,7 @@
     "test:ui": "vitest --ui"
   },
   "prisma": {
-    "screma": "./src/main/infra/database/orm/prisma/schema.prisma"
+    "schema": "./src/main/infra/database/orm/prisma/schema.prisma"
   },
   "keywords": [],
   "author": "",
