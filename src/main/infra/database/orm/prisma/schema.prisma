@@ -20,6 +20,18 @@ model Categoria {
     @@map("categorias")
 }
 
+model ProdutoCategorias {
+  produto           Produto   @relation(fields: [produtoId], references: [id])
+  produtoId         String    @db.Uuid @map("produto_id")
+  categoria         Categoria @relation(fields: [categoriaId], references: [id])
+  categoriaId       String    @db.Uuid @map("categoria_id")
+  dataCriacao       DateTime  @default(now()) @map("data_criacao")
+  dataAtualizacao   DateTime  @updatedAt @map("data_atualizaco")
+
+  @@id([produtoId, categoriaId])
+  @@map("produtos_categorias")
+}
+
 model Produto {
     id              String @id @db.Uuid
     nome            String @db.VarChar(50)
@@ -31,3 +43,5 @@ model Produto {
 
     @@map("produtos")
 }
+
+npx prisma migrate dev --name alter_produto_categoria

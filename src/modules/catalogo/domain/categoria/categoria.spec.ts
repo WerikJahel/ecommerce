@@ -21,7 +21,7 @@ beforeAll(async () => {
 
   nomeCategoriaValido = faker.string.alpha({ length: { min: 3, max: 50 } });
   nomeCategoriaTamanhoMinimoInvalido = faker.string.alpha({ length: { min: 0, max: 4 } })
-  nomeCategoriaTamanhoMaximoInvalido = faker.string.alpha({ length: { min: 50, max: 52 } })
+  nomeCategoriaTamanhoMaximoInvalido = faker.string.alpha({ length: { min: 51, max: 53 } })
   uuidValido = faker.string.uuid()
   uuidInvalido = faker.string.alpha({ length: { min: 3, max: 5 } })
 
