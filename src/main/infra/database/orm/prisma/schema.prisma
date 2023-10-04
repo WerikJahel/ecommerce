@@ -20,7 +20,7 @@ model Categoria {
     @@map("categorias")
 }
 
-model ProdutoCategorias {
+model ProdutosCategorias {
   produto           Produto   @relation(fields: [produtoId], references: [id])
   produtoId         String    @db.Uuid @map("produto_id")
   categoria         Categoria @relation(fields: [categoriaId], references: [id])
@@ -33,15 +33,16 @@ model ProdutoCategorias {
 }
 
 model Produto {
-    id              String @id @db.Uuid
-    nome            String @db.VarChar(50)
-    descricao       String @db.VarChar(200)
-    valor           Int
-    dataCriacao     DateTime @default(now()) @map("data_criacao")
-    dataAtualizacao DateTime @updatedAt @map("data_atualizacao")
-    categorias      Categoria[]
+  id                String   @id @db.Uuid
+  nome              String   @db.VarChar(50)
+  descricao         String   @db.VarChar(200)
+  valor             Int
+  dataCriacao       DateTime @default(now()) @map("data_criacao")
+  dataAtualizacao   DateTime @updatedAt @map("data_atualizacao")
+  dataExclusao      DateTime? @map("data_exclusao")
+  categorias        ProdutosCategorias[]
 
-    @@map("produtos")
+  @@map("produtos")
 }
 
-npx prisma migrate dev --name alter_produto_categoria
+//npx prisma migrate dev --name alter_produto_categoria
