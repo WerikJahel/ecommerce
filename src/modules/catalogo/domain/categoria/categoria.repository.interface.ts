@@ -1,4 +1,4 @@
-import { IRepository } from "../../../../shared/domain/repository.interface";
+import { IRepository } from "@shared/domain/repository.interface"
 
 interface ICategoriaRepository<T> extends IRepository<T> { }
 

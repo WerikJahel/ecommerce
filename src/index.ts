@@ -1,8 +1,8 @@
 
-import { Categoria } from './modules/catalogo/domain/categoria/categoria.entity';
-import { CategoriaPrismaRepository } from './modules/catalogo/infra/database/categoria.prisma.repository';
+import { Categoria } from "@modules/catalogo/domain/categoria/categoria.entity";
+import { CategoriaPrismaRepository } from "@modules/catalogo/infra/database/categoria.prisma.repository";
 import { PrismaClient } from "@prisma/client";
-import { DomainException } from './shared/domain/domain.exception';
+import { DomainException } from "@shared/domain/domain.exception";
 
 const prisma = new PrismaClient({
   log: ['query', 'info'],

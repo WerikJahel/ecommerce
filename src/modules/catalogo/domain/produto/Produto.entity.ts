@@ -1,3 +1,6 @@
+import { ProdutoMap } from "@modules/catalogo/mapper/produto.map";
+import { Entity } from "@shared/domain/entity";
+import { Categoria } from "../categoria/categoria.entity";
 import {
   CategoriaProdutoQuantidadeMaximaInvalida,
   CategoriaProdutoQuantidadeMinimaInvalida,
@@ -8,9 +11,6 @@ import {
   NomeProdutoTamanhoMinimoInvalido,
   ValorProdutoMinimoInvalido
 } from "./produto.exception";
-import { Entity } from "../../../../shared/domain/entity";
-import { ProdutoMap } from "../../mapper/produto.map";
-import { Categoria } from "../categoria/categoria.entity";
 import { IProduto, ProdutoProps, RecuperarProdutoProps } from "./produto.types";
 
 class Produto extends Entity<IProduto> implements IProduto {
@@ -105,4 +105,4 @@ class Produto extends Entity<IProduto> implements IProduto {
 
 }
 
-export { Produto }
+export { Produto };

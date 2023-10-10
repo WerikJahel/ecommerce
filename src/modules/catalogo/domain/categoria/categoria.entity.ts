@@ -1,15 +1,8 @@
-import {
-  ICategoria,
-  CreateCategoryProps,
-  RecuperarCategoriaProps,
-} from "./categoria.types";
-import {
-  NomeCategoriaNuloOuIndefinido,
-  NomeCategoriaTamanhoMaximoInvalido,
-  NomeCategoriaTamanhoMinimoInvalido,
-} from "./categoria.exception";
-import { Entity } from "../../../../shared/domain/entity";
-import { CategoriaMap } from "../../mapper/categoria.map";
+
+import { CategoriaMap } from "@modules/catalogo/mapper/categoria.map";
+import { Entity } from "@shared/domain/entity";
+import { NomeCategoriaNuloOuIndefinido, NomeCategoriaTamanhoMaximoInvalido, NomeCategoriaTamanhoMinimoInvalido } from "./categoria.exception";
+import { CreateCategoryProps, ICategoria, RecuperarCategoriaProps } from "./categoria.types";
 
 class Categoria extends Entity<ICategoria> implements ICategoria {
   private _nome: string;
@@ -58,3 +51,4 @@ class Categoria extends Entity<ICategoria> implements ICategoria {
 }
 
 export { Categoria };
+

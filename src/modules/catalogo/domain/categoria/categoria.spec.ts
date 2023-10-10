@@ -1,15 +1,10 @@
 import { faker } from "@faker-js/faker";
 import { beforeAll, describe, expect, test } from "vitest";
-import { IDEntityUUIDInvalid } from "../../../../shared/domain/domain.exception";
+import { CreateCategoryProps, RecuperarCategoriaProps } from "./categoria.types";
 import { Categoria } from "./categoria.entity";
-import {
-  NomeCategoriaTamanhoMaximoInvalido,
-  NomeCategoriaTamanhoMinimoInvalido,
-} from "./categoria.exception";
-import {
-  CreateCategoryProps,
-  RecuperarCategoriaProps,
-} from "./categoria.types";
+import { NomeCategoriaTamanhoMaximoInvalido, NomeCategoriaTamanhoMinimoInvalido } from "./categoria.exception";
+import { IDEntityUUIDInvalid } from "@shared/domain/domain.exception";
+
 
 let nomeCategoriaValido: string;
 let nomeCategoriaTamanhoMinimoInvalido: string;
