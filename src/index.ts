@@ -1,4 +1,3 @@
-
 import { Categoria } from "@modules/catalogo/domain/categoria/categoria.entity";
 import { CategoriaPrismaRepository } from "@modules/catalogo/infra/database/categoria.prisma.repository";
 import { PrismaClient } from "@prisma/client";
@@ -47,13 +46,13 @@ async function main() {
   //Inserir Categoria//
   /////////////////////
 
-  //const categoria: Categoria = Categoria.criar({
-  //    nome:'Sala e Quarto'
-  //});     
+  const categoria: Categoria = Categoria.criar({
+    nome: 'Sala e Quarto'
+  });
 
-  //const categoriaInserida = await categoriaRepo.inserir(categoria);
+  const categoriaInserida = await categoriaRepo.inserir(categoria);
 
-  //console.log(categoriaInserida);
+  console.log(categoriaInserida);
 
   ///////////////////////
   //Atualizar Categoria//

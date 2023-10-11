@@ -141,7 +141,7 @@
         </mxGraphModel>
     </diagram>
     <diagram name="Arquitetura Hexagonal" id="5hUa_UCPRQJtNCDU53TI">
-        <mxGraphModel dx="1484" dy="680" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="710" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="a5ceSEgB5ru1mALh6doU-0"/>
                 <mxCell id="a5ceSEgB5ru1mALh6doU-1" parent="a5ceSEgB5ru1mALh6doU-0"/>

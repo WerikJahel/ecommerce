@@ -15,7 +15,7 @@ model Categoria {
     nome            String @db.VarChar(50)
     dataCriacao     DateTime @default(now()) @map("data_criacao")
     dataAtualizacao DateTime @updatedAt @map("data_atualizacao")
-    produtos        Produto[]
+    produtos        ProdutosCategorias[]
 
     @@map("categorias")
 }
@@ -44,5 +44,3 @@ model Produto {
 
   @@map("produtos")
 }
-
-//npx prisma migrate dev --name alter_produto_categoria

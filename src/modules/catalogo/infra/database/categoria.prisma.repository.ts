@@ -3,7 +3,6 @@ import { CategoriaMap } from "../../mapper/categoria.map";
 import { Categoria } from "../../domain/categoria/categoria.entity";
 import { ICategoriaRepository } from "../../domain/categoria/categoria.repository.interface";
 
-
 class CategoriaPrismaRepository extends PrismaRepository implements ICategoriaRepository<Categoria> {
 
     async recuperarPorUuid(uuid: string): Promise<Categoria | null> {
