@@ -1,7 +1,7 @@
-import { PrismaRepository } from "../../../../shared/domain/infra/database/prisma.repository";
-import { CategoriaMap } from "../../mapper/categoria.map";
-import { Categoria } from "../../domain/categoria/categoria.entity";
-import { ICategoriaRepository } from "../../domain/categoria/categoria.repository.interface";
+import { Categoria } from "@modules/catalogo/domain/categoria/categoria.entity";
+import { ICategoriaRepository } from "@modules/catalogo/domain/categoria/categoria.repository.interface";
+import { CategoriaMap } from "@modules/catalogo/mappers/categoria.map";
+import { PrismaRepository } from "@shared/infra/database/prisma.repository";
 
 class CategoriaPrismaRepository extends PrismaRepository implements ICategoriaRepository<Categoria> {
 
@@ -69,4 +69,4 @@ class CategoriaPrismaRepository extends PrismaRepository implements ICategoriaRe
     }
 }
 
-export { CategoriaPrismaRepository };
+export { CategoriaPrismaRepository }

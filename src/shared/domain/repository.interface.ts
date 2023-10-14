@@ -1,5 +1,5 @@
 interface IQuery<T> {
-    recuperarPorUuid(uuid: string): Promise<T | null>
+    recuperarPorUuid(uuid: string): Promise<T | null>;
     recuperarTodos(): Promise<Array<T>>;
     existe(uuid: string): Promise<boolean>;
 }
@@ -10,6 +10,6 @@ interface ICommand<T> {
     deletar(uuid: string): Promise<boolean>;
 }
 
-interface IRepository<T> extends IQuery<T>, ICommand<T> { };
+interface IRepository<T> extends IQuery<T>, ICommand<T> {}; 
 
 export { IRepository }

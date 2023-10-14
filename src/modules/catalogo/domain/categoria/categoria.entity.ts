@@ -1,54 +1,89 @@
-
-import { CategoriaMap } from "@modules/catalogo/mapper/categoria.map";
+import { CategoriaMap } from "@modules/catalogo/mappers/categoria.map";
 import { Entity } from "@shared/domain/entity";
 import { NomeCategoriaNuloOuIndefinido, NomeCategoriaTamanhoMaximoInvalido, NomeCategoriaTamanhoMinimoInvalido } from "./categoria.exception";
-import { CreateCategoryProps, ICategoria, RecuperarCategoriaProps } from "./categoria.types";
+import { CriarCategoriaProps, ICategoria, RecuperarCategoriaProps } from "./categoria.types";
 
 class Categoria extends Entity<ICategoria> implements ICategoria {
-  private _nome: string;
 
-  public get nome(): string {
-    return this._nome;
-  }
+    ///////////////////////
+	//Atributos de Classe//
+	///////////////////////
 
-  private set nome(value: string) {
-    if (value === null || value === undefined) {
-      throw new NomeCategoriaNuloOuIndefinido();
+	private _nome: string;
+    private _dataCriacao?: Date | undefined;
+	private _dataAtualizacao?: Date | undefined;
+    
+    ///////////////
+	//Gets e Sets//
+	///////////////
+   
+    public get nome(): string {
+        return this._nome;
     }
 
-    if (value.trim().length < 3) {
-      throw new NomeCategoriaTamanhoMinimoInvalido();
+    private set nome(value: string) {
+        if (value === null || value === undefined) {
+            throw new NomeCategoriaNuloOuIndefinido();
+        }
+
+        if (value.trim().length < 3) {
+            throw new NomeCategoriaTamanhoMinimoInvalido();
+        }
+
+        if (value.trim().length > 50) {
+            throw new NomeCategoriaTamanhoMaximoInvalido();
+        }
+
+        this._nome = value;
     }
 
-    if (value.trim().length > 50) {
-      throw new NomeCategoriaTamanhoMaximoInvalido();
+    public get dataCriacao(): Date | undefined {
+        return this._dataCriacao;
     }
 
-    this._nome = value;
-  }
+    private set dataCriacao(value: Date | undefined) {
+        this._dataCriacao = value;
+    }
 
-  private constructor(categoria: ICategoria) {
-    super(categoria.id);
-    this.nome = categoria.nome;
-  }
+    public get dataAtualizacao(): Date | undefined {
+        return this._dataAtualizacao;
+    }
 
-  public static criar(props: CreateCategoryProps): Categoria {
-    let { nome } = props;
-    return new Categoria({ nome });
-  }
+    private set dataAtualizacao(value: Date | undefined) {
+        this._dataAtualizacao = value;
+    }
 
-  public static recuperar(props: RecuperarCategoriaProps): Categoria {
-    return new Categoria(props);
-  }
+    //////////////
+	//Construtor//
+	//////////////
 
-  public toDTO(): ICategoria {
-    return CategoriaMap.toDTO(this);
-  }
+    private constructor(categoria:ICategoria){
+        super(categoria.id);
+        this.nome = categoria.nome;
+        this.dataCriacao = categoria.dataCriacao;
+        this.dataAtualizacao = categoria.dataAtualizacao;
+    }
 
-  // public serialize() {
-  //   return JSON.stringify(this);
-  // }
+    /////////////////////////
+    //Static Factory Method//
+    /////////////////////////
+
+    public static criar(props: CriarCategoriaProps): Categoria {
+        return new Categoria(props);
+    }
+
+    public static recuperar(props: RecuperarCategoriaProps): Categoria {
+        return new Categoria(props);
+    }
+
+    ///////////
+    //Métodos//
+    ///////////
+
+    public toDTO(): ICategoria {
+        return CategoriaMap.toDTO(this);
+    }
+
 }
 
 export { Categoria };
-

@@ -1,47 +1,69 @@
 import { randomUUID } from "crypto";
 import { IDEntityUUIDInvalid } from "./domain.exception";
 
+//Método que verifica se é a instância de uma entidade
 const isEntity = (v: any): v is Entity<any> => {
-  return v instanceof Entity;
+    return v instanceof Entity;
 };
 
 abstract class Entity<T> {
-  private _id: string;
 
-  public get id(): string {
-    return this._id;
-  }
-  private set id(value: string) {
-    if (!Entity.validUUID(value)) {
-      throw new IDEntityUUIDInvalid();
+    /////////////
+    //Atributos//
+    /////////////
+
+	private _id: string;
+
+    ///////////////
+    //Gets e Sets//
+    ///////////////
+
+    public get id(): string {
+        return this._id;
     }
 
-    this._id = value;
-  }
+    private set id(value: string) {
 
-  constructor(id?: string) {
-    this.id = id ? id : randomUUID();
-  }
+        if (!Entity.validUUID(value)){
+            throw new IDEntityUUIDInvalid();
+        }
 
-  public equals(object?: Entity<T>): boolean {
-    if (object == null || object == undefined) {
-      return false;
-    }
-    if (this === object) {
-      return true;
-    }
-    if (!isEntity(object)) {
-      return false;
+        this._id = value;
     }
 
-    return this._id == object._id;
-  }
+    //////////////
+    //Construtor//
+    //////////////
 
-  public static validUUID(UUIDD: string): boolean {
-    let padraoUUID: RegExp =
-      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-    return padraoUUID.test(UUIDD);
-  }
+    constructor(id?: string) {
+        this.id = id ? id : randomUUID();
+    }
+
+    ///////////
+    //Métodos//
+    ///////////
+
+    public equals(object?: Entity<T>): boolean {
+        if (object == null || object == undefined) {
+          return false
+        }
+    
+        if (this === object) {
+          return true
+        }
+    
+        if (!isEntity(object)) {
+          return false
+        }
+    
+        return this._id == object._id
+    }
+
+    public static validUUID(UUID: string): boolean {
+        let padraoUUID: RegExp = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+        return padraoUUID.test(UUID);
+    } 
+
 }
 
-export { Entity };
+export { Entity }
