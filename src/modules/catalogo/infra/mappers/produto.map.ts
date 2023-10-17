@@ -1,7 +1,7 @@
 import { ProdutoComCategoriaPrisma } from "@shared/infra/database/prisma.types";
-import { Produto } from "../domain/produto/produto.entity";
-import { IProduto, RecuperarProdutoProps, StatusProduto } from "../domain/produto/produto.types";
-import { Categoria } from "../domain/categoria/categoria.entity";
+import { Produto } from "../../domain/produto/produto.entity";
+import { IProduto, RecuperarProdutoProps, StatusProduto } from "../../domain/produto/produto.types";
+import { Categoria } from "../../domain/categoria/categoria.entity";
 import { CategoriaMap } from "./categoria.map";
 import { StatusProdutoPrisma } from "@prisma/client";
 
@@ -9,15 +9,15 @@ class ProdutoMap {
 
     public static toDTO(produto: Produto): IProduto {
         return {
-            id: produto.id,
-            nome: produto.nome,
-            descricao: produto.descricao,
-            valor: produto.valor,
-            categorias: produto.categorias,
-            dataCriacao: produto.dataCriacao,
-            dataAtualizacao: produto.dataAtualizacao,
-            dataExclusao: produto.dataExclusao,
-            status: produto.status
+          id: produto.id,
+          nome: produto.nome,
+          descricao: produto.descricao,
+          valor: produto.valor,
+          categorias: produto.categorias,
+          dataCriacao: produto.dataCriacao,
+          dataAtualizacao: produto.dataAtualizacao,
+          dataExclusao: produto.dataExclusao,
+          status: produto.status
         }
     }
 
@@ -54,7 +54,7 @@ class ProdutoMap {
 
     }
 
-    public static toStatusProdutoPrisma(status: StatusProduto): StatusProdutoPrisma {
+    public static toStatusProdutoPrisma(status: StatusProduto): StatusProdutoPrisma{
         return StatusProdutoPrisma[status.toString() as keyof typeof StatusProdutoPrisma];
     }
 

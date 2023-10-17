@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 
-const produtoIncludeCategoriaPrisma = Prisma.validator.<Prisma.ProdutoInclude>()(
+const produtoIncludeCategoriaPrisma = Prisma.validator<Prisma.ProdutoInclude>()(
     {
         categorias: {
             include: {

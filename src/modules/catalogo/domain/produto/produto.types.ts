@@ -1,5 +1,5 @@
 import { IDatasControle, KeysDatasControle } from "@shared/domain/datas.types";
-import { Categoria } from "../categoria/categoria.entity";
+import { ICategoria } from "../categoria/categoria.types";
 
 enum StatusProduto {
     ATIVO = "ATIVO",
@@ -8,12 +8,12 @@ enum StatusProduto {
 
 //Todos os atributos/propriedades que um produto deve ter no sistema
 //Auxilia na criação de invariantes e modelos ricos
-interface IProduto extends IDatasControle {
+interface IProduto extends IDatasControle{
     id?: string;
-    nome: string;
-    descricao: string;
+    nome:string;
+    descricao:string;
     valor: number;
-    categorias: Array<Categoria>;
+    categorias: Array<ICategoria>;
     status?: StatusProduto
 }
 
@@ -29,7 +29,7 @@ type RecuperarProdutoProps = IProduto & {
 };
 
 export {
-    IProduto,
+    IProduto, 
     CriarProdutoProps,
     RecuperarProdutoProps,
     StatusProduto
