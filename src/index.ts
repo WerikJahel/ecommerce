@@ -1,5 +1,5 @@
 import { Categoria } from '@modules/catalogo/domain/categoria/categoria.entity';
-import { Produto } from '@modules/catalogo/domain/produto/Produto.entity';
+import { Produto } from '@modules/catalogo/domain/produto/produto.entity';
 import { StatusProduto } from '@modules/catalogo/domain/produto/produto.types';
 import { CategoriaPrismaRepository } from '@modules/catalogo/infra/database/categoria.prisma.repository';
 import { ProdutoPrismaRepository } from '@modules/catalogo/infra/database/produto.prisma.repository';
