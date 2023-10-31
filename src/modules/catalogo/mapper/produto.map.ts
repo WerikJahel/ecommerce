@@ -1,5 +1,5 @@
 import { ProdutoComCategoriaPrisma } from "@shared/domain/infra/database/prisma.types";
-import { Produto } from "../domain/produto/Produto.entity";
+import { Produto } from "../domain/produto/produto.entity";
 import { IProduto, RecuperarProdutoProps } from "../domain/produto/produto.types";
 import { Categoria } from "../domain/categoria/categoria.entity";
 import { CategoriaMap } from "./categoria.map";
