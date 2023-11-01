@@ -79,19 +79,6 @@ describe('Repositório Prisma: Produto', () => {
                 status: status
             };
 
-            /*
-            ({ categoria: {
-                id: UUID,
-                nome: nome,
-                dataCriacao:
-                dataCriacao,
-                dataAtualizacao: dataAtualizacao }
-            } & { produtoId: UUID,
-                categoriaId: UUID,
-                dataCriacao: dataCriacao,
-                dataAtualizacao: dataAtualizacao })
-                */
-
             prismaMock.produto.findUnique.mockResolvedValue(produtoPrisma);
 
             const produto: Produto = ProdutoMap.fromPrismaModelToDomain(produtoPrisma);
@@ -111,93 +98,120 @@ describe('Repositório Prisma: Produto', () => {
     });
 
 
-    // describe('Recuperar Todos os Produtos', () => {
+    describe('Recuperar Todos os Produtos', () => {
 
-    //     test('Deve Recuperar Todos os Produtos', async () => {
-    //         const listaProdutoPrisma = [{
-    //             id: UUID,
-    //             nome: nome,
-    //             descricao: descricao,
-    //             valor: valor,
-    //             categorias: categorias,
-    //             dataCriacao: dataCriacao,
-    //             dataAtualizacao: dataAtualizacao,
-    //             dataExclusao: dataExclusao,
-    //             status: status
-    //         }, {
-    //             id: UUID,
-    //             nome: nome,
-    //             descricao: descricao,
-    //             valor: valor,
-    //             categorias: categorias,
-    //             dataCriacao: dataCriacao,
-    //             dataAtualizacao: dataAtualizacao,
-    //             dataExclusao: dataExclusao,
-    //             status: status
-    //         }];
+        test('Deve Recuperar Todos os Produtos', async () => {
+            const listaProdutoPrisma = [{
+                id: UUID,
+                nome: nome,
+                descricao: descricao,
+                valor: valor,
+                categorias: [{
+                    produtoId: UUID,
+                    categoriaId: UUID,
+                    dataCriacao: dataCriacao,
+                    dataAtualizacao: dataAtualizacao,
+                    categoria: {
+                        id: UUID,
+                        nome: nome,
+                        dataCriacao: dataCriacao,
+                        dataAtualizacao: dataAtualizacao
+                    }
+                }],
+                dataCriacao: dataCriacao,
+                dataAtualizacao: dataAtualizacao,
+                dataExclusao: null,
+                status: StatusProduto.ATIVO
+            }, {
+                id: UUID,
+                nome: nome,
+                descricao: descricao,
+                valor: valor,
+                categorias: [{
+                    produtoId: UUID,
+                    categoriaId: UUID,
+                    dataCriacao: dataCriacao,
+                    dataAtualizacao: dataAtualizacao,
+                    categoria: {
+                        id: UUID,
+                        nome: nome,
+                        dataCriacao: dataCriacao,
+                        dataAtualizacao: dataAtualizacao
+                    }
+                }],
+                dataCriacao: dataCriacao,
+                dataAtualizacao: dataAtualizacao,
+                dataExclusao: null,
+                status: StatusProduto.ATIVO
+            }];
 
-    //         prismaMock.produto.findMany.mockResolvedValue(listaProdutoPrisma);
+            prismaMock.produto.findMany.mockResolvedValue(listaProdutoPrisma);
 
-    //         const produto: Produto = ProdutoMap.fromPrismaModelToDomain(listaProdutoPrisma);
+            const produtos: Array<Produto> = listaProdutoPrisma.map(
+                (produto) => ProdutoMap.fromPrismaModelToDomain(produto)
+            )
 
-    //         const produtos: Array<Produto> = listaProdutoPrisma.map(
-    //             (produto) => ProdutoMap.fromPrismaModelToDomain(produto)
-    //         )
+            const todosProdutosRecuperados = await produtoRepositorio.recuperarTodos();
 
-    //         const todosProdutosRecuperados = await produtoRepositorio.recuperarTodos();
+            expect(todosProdutosRecuperados).toStrictEqual(produtos);
+            expect(prismaMock.produto.findMany).toHaveBeenCalledTimes(1);
+            expect(prismaMock.produto.findMany).toHaveBeenCalledWith({
+                where: {
+                    dataExclusao: null,
+                    status: StatusProduto.ATIVO
+                },
+                include: produtoIncludeCategoriaPrisma
+            })
+        });
+    })
 
-    //         expect(todosProdutosRecuperados).toStrictEqual(produto);
-    //         expect(prismaMock.produto.findMany).toHaveBeenCalledTimes(1);
-    //     });
-    // })
+    describe('Existe Produtos', () => {
 
-    // describe('Existe Produtos', () => {
+        test('Deve Verificar se Existe Uma Determinada Produto por UUID', async () => {
 
-    //     test('Deve Verificar se Existe Uma Determinada Produto por UUID', async () => {
-
-    //         /////// Ganbiarra ///////
-    //         {
-    //             let UUIDValido: string;
-    //             let nomeCategoriaValido: string;
-    //             let dataCriacaoCategoria: Date;
-    //             let dataAtualizacaoCategoria: Date;
+            /////// Ganbiarra ///////
+            {
+                let UUIDValido: string;
+                let nomeCategoriaValido: string;
+                let dataCriacaoCategoria: Date;
+                let dataAtualizacaoCategoria: Date;
 
 
-    //             //Preencendo as variáveis com dados em conformidade com as restrições da regra de negócio
-    //             UUIDValido = faker.string.uuid(); // Retorna um UUID v4
-    //             nomeCategoriaValido = faker.string.alpha({ length: { min: Categoria.TAMANHO_MINIMO_NOME, max: Categoria.TAMANHO_MAXIMO_NOME } });
-    //             dataCriacaoCategoria = faker.date.anytime();
-    //             dataAtualizacaoCategoria = faker.date.anytime();
+                //Preencendo as variáveis com dados em conformidade com as restrições da regra de negócio
+                UUIDValido = faker.string.uuid(); // Retorna um UUID v4
+                nomeCategoriaValido = faker.string.alpha({ length: { min: Categoria.TAMANHO_MINIMO_NOME, max: Categoria.TAMANHO_MAXIMO_NOME } });
+                dataCriacaoCategoria = faker.date.anytime();
+                dataAtualizacaoCategoria = faker.date.anytime();
 
-    //             const categoriass = {
-    //                 id: UUIDValido,
-    //                 nome: nomeCategoriaValido,
-    //                 dataCriacao: dataCriacaoCategoria,
-    //                 dataAtualizacao: dataAtualizacaoCategoria
-    //             }
-    //         }
+                const categoriass = {
+                    id: UUIDValido,
+                    nome: nomeCategoriaValido,
+                    dataCriacao: dataCriacaoCategoria,
+                    dataAtualizacao: dataAtualizacaoCategoria
+                }
+            }
 
-    //         const produtoPrisma = {
-    //             id: UUID,
-    //             nome: nome,
-    //             descricao: descricao,
-    //             valor: valor,
-    //             categorias: categorias,
-    //             dataCriacao: dataCriacao,
-    //             dataAtualizacao: dataAtualizacao,
-    //             dataExclusao: dataExclusao,
-    //             status: status
-    //         };
+            const produtoPrisma = {
+                id: UUID,
+                nome: nome,
+                descricao: descricao,
+                valor: valor,
+                categorias: categorias,
+                dataCriacao: dataCriacao,
+                dataAtualizacao: dataAtualizacao,
+                dataExclusao: dataExclusao,
+                status: status
+            };
 
-    //         prismaMock.produto.findUnique.mockResolvedValue(produtoPrisma);
+            prismaMock.produto.findUnique.mockResolvedValue(produtoPrisma);
 
-    //         const existeProduto = await produtoRepositorio.existe(produtoPrisma.id);
+            const existeProduto = await produtoRepositorio.existe(produtoPrisma.id);
 
-    //         expect(existeProduto).toBeTruthy();
+            expect(existeProduto).toBeTruthy();
 
-    //     });
+        });
 
-    // });
+    });
 
     // describe('Inserir Produto', () => {
 
