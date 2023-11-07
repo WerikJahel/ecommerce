@@ -7,6 +7,7 @@ import { DomainException } from '@shared/domain/domain.exception';
 import { prisma } from '@main/infra/database/orm/prisma/client';
 import { categoriaRepositorio as categoriaRepo } from '@modules/catalogo/infra/database';
 import { produtoRepositorio as produtoRepo } from '@modules/catalogo/infra/database';
+import { recuperarCategoriaPorIdUseCase, recuperarTodasCategoriasUseCase } from '@modules/catalogo/application/use-case';
 
 
 async function main() {
@@ -21,17 +22,13 @@ async function main() {
     //Recuperar Categoria por UUID//
     ////////////////////////////////
 
-    //const categoriaRecuperada: Categoria | null = await categoriaRepo.recuperarPorUuid('5ccdd6ab-d043-42f0-937b-1260fe47886a');
-
-    //console.log(categoriaRecuperada);
+    // console.log(await recuperarCategoriaPorIdUseCase.execute("f5c57868-57e1-4cfb-bb5a-c52d08eca9ba"));
 
     /////////////////////////////////
     //Recuperar Todas as Categorias//
     /////////////////////////////////
 
-    //const todasCategorias: Array<Categoria> = await categoriaRepo.recuperarTodos();
-
-    //console.log(todasCategorias);
+    console.log(await recuperarTodasCategoriasUseCase.execute());
 
     ////////////////////////////////
     //Verifica se Existe Categoria//
@@ -45,13 +42,13 @@ async function main() {
     //Inserir Categoria//
     /////////////////////
 
-    const categoria: Categoria = Categoria.criar({
-        nome: 'Banho'
-    });
+    // const categoria: Categoria = Categoria.criar({
+    //     nome: 'Banho'
+    // });
 
-    const categoriaInserida = await categoriaRepo.inserir(categoria);
+    // const categoriaInserida = await categoriaRepo.inserir(categoria);
 
-    console.log(categoriaInserida);
+    // console.log(categoriaInserida);
 
     ///////////////////////
     //Atualizar Categoria//
