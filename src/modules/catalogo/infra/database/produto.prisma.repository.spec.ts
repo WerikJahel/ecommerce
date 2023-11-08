@@ -165,50 +165,49 @@ describe('Repositório Prisma: Produto', () => {
         });
     })
 
-    describe('Existe Produtos', () => {
+    describe('Existe Produto', () => {
 
         test('Deve Verificar se Existe Uma Determinada Produto por UUID', async () => {
 
-            /////// Ganbiarra ///////
-            {
-                let UUIDValido: string;
-                let nomeCategoriaValido: string;
-                let dataCriacaoCategoria: Date;
-                let dataAtualizacaoCategoria: Date;
-
-
-                //Preencendo as variáveis com dados em conformidade com as restrições da regra de negócio
-                UUIDValido = faker.string.uuid(); // Retorna um UUID v4
-                nomeCategoriaValido = faker.string.alpha({ length: { min: Categoria.TAMANHO_MINIMO_NOME, max: Categoria.TAMANHO_MAXIMO_NOME } });
-                dataCriacaoCategoria = faker.date.anytime();
-                dataAtualizacaoCategoria = faker.date.anytime();
-
-                const categoriass = {
-                    id: UUIDValido,
-                    nome: nomeCategoriaValido,
-                    dataCriacao: dataCriacaoCategoria,
-                    dataAtualizacao: dataAtualizacaoCategoria
-                }
-            }
-
             const produtoPrisma = {
+
                 id: UUID,
                 nome: nome,
                 descricao: descricao,
                 valor: valor,
-                categorias: categorias,
+                categorias: [{
+                    categoria: {
+                        id: UUID,
+                        nome: nome,
+                        dataCriacao: dataCriacao,
+                        dataAtualizacao: dataAtualizacao
+                    },
+                    produtoId: UUID,
+                    categoriaId: UUID,
+                    dataCriacao: dataCriacao,
+                    dataAtualizacao: dataAtualizacao
+                }],
                 dataCriacao: dataCriacao,
                 dataAtualizacao: dataAtualizacao,
                 dataExclusao: dataExclusao,
                 status: status
             };
 
+
             prismaMock.produto.findUnique.mockResolvedValue(produtoPrisma);
 
-            const existeProduto = await produtoRepositorio.existe(produtoPrisma.id);
+            const produto: Produto = ProdutoMap.fromPrismaModelToDomain(produtoPrisma);
+
+            const existeProduto = await produtoRepositorio.existe(produto.id);
 
             expect(existeProduto).toBeTruthy();
-
+            expect(prismaMock.produto.findUnique).toHaveBeenCalledTimes(1);
+            expect(prismaMock.produto.findUnique).toBeCalledWith({
+                where: {
+                    id: produto.id
+                },
+                include: produtoIncludeCategoriaPrisma
+            })
         });
 
     });
