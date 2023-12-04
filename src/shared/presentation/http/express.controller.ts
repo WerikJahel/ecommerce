@@ -1,3 +1,5 @@
+import { Response } from "express";
+
 abstract class ExpressController {
 
     protected sendSuccessResponse(response: Response, data: any, status = 200) {
