@@ -8,7 +8,7 @@ import { RecuperarProdutoPorIdUseCase } from "./recuperar-produto-por-id/recuper
 
 ///////Categoria///////
 const recuperarCategoriaPorIdUseCase = new RecuperarCategoriaPorIdUseCase(categoriaRepositorio);
-const recuperarTodasCategorias = new RecuperarTodasCategoriasUseCase(categoriaRepositorio);
+const recuperarTodasCategoriasUseCase = new RecuperarTodasCategoriasUseCase(categoriaRepositorio);
 const inserirCategoriaUseCase = new InserirCategoriaUseCase(categoriaRepositorio);
 const atualizarCategoriaUseCase = new AtualizarCategoriaUseCase(categoriaRepositorio);
 const deletarCategoriaUseCase = new DeletarCategoriaPorIdUseCase(categoriaRepositorio);
@@ -21,6 +21,6 @@ export {
     inserirCategoriaUseCase,
     recuperarCategoriaPorIdUseCase,
     atualizarCategoriaUseCase,
-    recuperarTodasCategorias,
+    recuperarTodasCategoriasUseCase,
     recuperarProdutoPorIdUseCase
 };
