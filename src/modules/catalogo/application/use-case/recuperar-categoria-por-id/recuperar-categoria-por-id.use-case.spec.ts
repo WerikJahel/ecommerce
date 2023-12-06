@@ -23,7 +23,6 @@ describe('Caso de Uso: Recuperar Categoria por ID', () => {
         mockReset(categoriaRepositorioMock);
     });
 
-
     test('Deve Recuperar Uma Categoria por UUID', async () => {
 
         //Dado (Given)
