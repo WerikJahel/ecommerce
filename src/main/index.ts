@@ -1,5 +1,5 @@
-import { createHTTPServer } from "./presentation/http/server";
 import dotenv from 'dotenv';
+import { createHTTPServer } from './presentation/http/server';
 
 async function bootstrap() {
 
@@ -10,7 +10,7 @@ async function bootstrap() {
     const host_name = process.env.HOST_NAME;
     const port = process.env.PORT;
 
-    console.log(`[${api_name}] 🚀 Inicializando a API....`);
+    console.log(`[${api_name}] 🚀 Inicializando a API...`);
 
     const httpServer = await createHTTPServer();
 
