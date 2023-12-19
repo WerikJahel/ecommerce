@@ -3,7 +3,7 @@ import { ICategoriaRepository } from "@modules/catalogo/domain/categoria/categor
 import { ICategoria } from "@modules/catalogo/domain/categoria/categoria.types";
 import { afterEach, beforeAll, describe, expect, test, vi } from "vitest";
 import { MockProxy, mock, mockReset } from "vitest-mock-extended";
-import { CategoriaApplicationExceptions } from "../../exception/categoria.application.exception";
+import { CategoriaApplicationExceptions } from "../../exceptions/categoria.application.exception";
 import { RecuperarCategoriaPorIdUseCase } from "./recuperar-categoria-por-id.use-case";
 
 let categoriaRepositorioMock: MockProxy<ICategoriaRepository<Categoria>>;;

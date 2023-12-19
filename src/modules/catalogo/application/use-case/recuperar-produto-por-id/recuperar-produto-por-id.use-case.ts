@@ -3,7 +3,7 @@ import { IProdutoRepository } from "@modules/catalogo/domain/produto/produto.rep
 import { IProduto } from "@modules/catalogo/domain/produto/produto.types";
 import { ProdutoMap } from "@modules/catalogo/infra/mappers/produto.map";
 import { IUseCase } from "@shared/application/use-case.interface";
-import { ProdutoApplicationExceptions } from "../../exception/produto.application.exception";
+import { ProdutoApplicationExceptions } from "../../exceptions/produto.application.exception";
 
 class RecuperarProdutoPorIdUseCase implements IUseCase<string, IProduto> {
     private _produtoRepositorio: IProdutoRepository<Produto>;

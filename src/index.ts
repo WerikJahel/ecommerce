@@ -34,7 +34,7 @@ async function main() {
     //Inserir Categoria//
     /////////////////////
 
-    // console.log(await inserirCategoriaUseCase.execute({ nome: 'Cama' }));
+    //console.log(await inserirCategoriaUseCase.execute({ nome: 'Cama' }));
 
     /////////////////////////////////
     ///////Atualizar Categoria///////
@@ -49,13 +49,13 @@ async function main() {
     ///////Deletar Categoria//////
     //////////////////////////////
 
-    // console.log(await deletarCategoriaUseCase.execute("f5c57868-57e1-4cfb-bb5a-c52d08eca9ba"));
+    //console.log(await deletarCategoriaUseCase.execute("2c404966-1cc1-403a-96a9-c7a08b11bdca"));
 
     /////////////////////////////////////
     //////Recuperar Produto Por Id///////
     /////////////////////////////////////
 
-    console.log(await recuperarProdutoPorIdUseCase.execute("aabd804e-6761-45f3-a896-6c233b313019"));
+    //console.log(await recuperarProdutoPorIdUseCase.execute("aabd804e-6761-45f3-a896-6c233b313019"));
 
 
 }
