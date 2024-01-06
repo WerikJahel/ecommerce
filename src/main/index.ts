@@ -1,10 +1,9 @@
-import dotenv from 'dotenv';
-import { createHTTPServer } from './presentation/http/server';
 import { prisma } from '@main/infra/database/orm/prisma/client';
 import { logger } from '@shared/helpers/logger.winston';
+import dotenv from 'dotenv';
 import { Application } from 'express';
 import { createExpressApplication } from './presentation/http/app.express';
-import { error } from 'console';
+import { createHTTPServer } from './presentation/http/server';
 
 
 async function bootstrap() {

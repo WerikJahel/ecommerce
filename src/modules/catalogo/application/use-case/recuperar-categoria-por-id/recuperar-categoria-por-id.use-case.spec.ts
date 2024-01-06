@@ -1,10 +1,10 @@
 import { Categoria } from "@modules/catalogo/domain/categoria/categoria.entity";
 import { ICategoriaRepository } from "@modules/catalogo/domain/categoria/categoria.repository.interface";
-import { ICategoria } from "@modules/catalogo/domain/categoria/categoria.types";
 import { afterEach, beforeAll, describe, expect, test, vi } from "vitest";
 import { MockProxy, mock, mockReset } from "vitest-mock-extended";
-import { CategoriaApplicationExceptions } from "../../exceptions/categoria.application.exception";
 import { RecuperarCategoriaPorIdUseCase } from "./recuperar-categoria-por-id.use-case";
+import { ICategoria } from "@modules/catalogo/domain/categoria/categoria.types";
+import { CategoriaApplicationExceptions } from "../../exceptions/categoria.application.exception";
 
 let categoriaRepositorioMock: MockProxy<ICategoriaRepository<Categoria>>;;
 let recuperarCategoriaPorIdUseCase: RecuperarCategoriaPorIdUseCase;
@@ -12,9 +12,7 @@ let recuperarCategoriaPorIdUseCase: RecuperarCategoriaPorIdUseCase;
 describe('Caso de Uso: Recuperar Categoria por ID', () => {
 
     beforeAll(async () => {
-
         categoriaRepositorioMock = mock<ICategoriaRepository<Categoria>>();
-
         recuperarCategoriaPorIdUseCase = new RecuperarCategoriaPorIdUseCase(categoriaRepositorioMock);
     });
 
@@ -45,7 +43,6 @@ describe('Caso de Uso: Recuperar Categoria por ID', () => {
 
     });
 
-    //Usado para indicar que uma asserção falhará explicitamente.
     test('Deve Lançar uma Exceção ao Tentar Recuperar uma Categoria que Não Existe', async () => {
 
         //Dado (Given)
@@ -57,10 +54,10 @@ describe('Caso de Uso: Recuperar Categoria por ID', () => {
         categoriaRepositorioMock.existe.mockResolvedValue(false);
 
         //Quando (When) e Então (Then)
-        await expect(() => recuperarCategoriaPorIdUseCase.execute("80830927-8c3e-4db9-9ddf-30ea191f139b"))
+        await expect(() => recuperarCategoriaPorIdUseCase.execute(categoriaInputDTO.id))
             .rejects
             .toThrowError(CategoriaApplicationExceptions.CategoriaNaoEncontrada);
 
     });
 
-});
+}); 
