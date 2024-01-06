@@ -13,6 +13,7 @@ abstract class ExpressController {
     protected sendNotFoundResponse(response: Response, message = 'Not found') {
         response.status(404).json({ error: message });
     }
+
 }
 
 export { ExpressController }

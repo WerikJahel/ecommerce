@@ -30,4 +30,4 @@ class RecuperarCategoriaPorIdExpressController extends ExpressController {
 
 }
 
-export { RecuperarCategoriaPorIdExpressController }
+export { RecuperarCategoriaPorIdExpressController };

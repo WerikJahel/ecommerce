@@ -1,7 +1,7 @@
-import { NextFunction, Request, Response } from "express";
-import { ExpressController } from "@shared/presentation/http/express.controller";
-import { ICategoria } from "@modules/catalogo/domain/categoria/categoria.types";
 import { RecuperarTodasCategoriasUseCase } from "@modules/catalogo/application/use-case/recuperar-todas-categorias/recuperar-todas-categorias.use-case";
+import { ICategoria } from "@modules/catalogo/domain/categoria/categoria.types";
+import { ExpressController } from "@shared/presentation/http/express.controller";
+import { NextFunction, Request, Response } from "express";
 
 class RecuperarTodasCategoriaExpressController extends ExpressController {
 
@@ -19,6 +19,7 @@ class RecuperarTodasCategoriaExpressController extends ExpressController {
         } catch (error) {
             next(error);
         }
+
     }
 
 }
