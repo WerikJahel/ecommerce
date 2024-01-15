@@ -1,8 +1,7 @@
-import { NextFunction, Request, Response } from "express";
-import { ExpressController } from "@shared/presentation/http/express.controller";
-import { CriarCategoriaProps, ICategoria } from "@modules/catalogo/domain/categoria/categoria.types";
 import { InserirCategoriaUseCase } from "@modules/catalogo/application/use-case/inserir-categoria/inserir-categoria.use-case";
-
+import { CriarCategoriaProps, ICategoria } from "@modules/catalogo/domain/categoria/categoria.types";
+import { ExpressController } from "@shared/presentation/http/express.controller";
+import { NextFunction, Request, Response } from "express";
 
 class InserirCategoriaExpressController extends ExpressController {
 
@@ -15,10 +14,11 @@ class InserirCategoriaExpressController extends ExpressController {
 
     async inserir(request: Request, response: Response, next: NextFunction) {
         try {
-            const categoriaInputDTO: CriarCategoriaProps = request.body;
+            const categoriaInputDTO: CriarCategoriaProps = request.body as CriarCategoriaProps;
             const categoriaOutputDTO: ICategoria = await this._inserirCategoriaUseCase.execute(categoriaInputDTO);
             this.sendSuccessResponse(response, categoriaOutputDTO);
-        } catch (error) {
+        }
+        catch (error) {
             next(error);
         }
     }
