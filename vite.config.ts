@@ -1,8 +1,5 @@
-import path from "path";
-import { defineConfig } from "vitest/config";
-
-
-
+import path from 'path';
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
     test: {
@@ -19,6 +16,10 @@ export default defineConfig({
                 find: "@shared",
                 replacement: path.resolve(__dirname, "src/shared"),
             },
+            {
+                find: "@main",
+                replacement: path.resolve(__dirname, "src/main"),
+            }
         ]
     }
 })
