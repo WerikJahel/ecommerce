@@ -1,6 +1,6 @@
 import { Categoria } from '@modules/catalogo/domain/categoria/categoria.entity';
 import { Produto } from '@modules/catalogo/domain/produto/produto.entity';
-import { StatusProduto } from '@modules/catalogo/domain/produto/produto.types';
+import { CriarProdutoProps, StatusProduto } from '@modules/catalogo/domain/produto/produto.types';
 import { CategoriaPrismaRepository } from '@modules/catalogo/infra/database/categoria.prisma.repository';
 import { ProdutoPrismaRepository } from '@modules/catalogo/infra/database/produto.prisma.repository';
 import { DomainException } from '@shared/domain/domain.exception';
@@ -18,11 +18,22 @@ async function main() {
         }
     );
 
+
     ////////////////////////////////
     //Recuperar Categoria por UUID//
     ////////////////////////////////
 
-    //console.log(await recuperarCategoriaPorIdUseCase.execute("f5c57868-57e1-4cfb-bb5a-c52d08eca9ba"));
+    // const cat = await recuperarCategoriaPorIdUseCase.execute("c724d85c-93ab-4d5d-ac05-944f95dca3ee");
+
+    // const iProduto: CriarProdutoProps = {
+    //     nome: 'Betão',
+    //     descricao: 'Betão Doce',
+    //     valor: 1.25,
+    //     categorias: [cat]
+    // }
+
+    // const produto = Produto.criar(iProduto)
+    // console.log(produto)
 
     /////////////////////////////////
     //Recuperar Todas as Categorias//

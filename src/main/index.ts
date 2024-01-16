@@ -4,6 +4,7 @@ import { prisma } from '@main/infra/database/orm/prisma/client';
 import { Application } from 'express';
 import { createExpressApplication } from './presentation/http/app.express';
 import { logger } from '@shared/helpers/logger.winston';
+import { createSPAExpressApplication } from './presentation/http/spa.express';
 
 async function bootstrap() {
 
@@ -24,6 +25,14 @@ async function bootstrap() {
 
     httpServer.listen({ port: port }, async () => {
         logger.ok(`Servidor HTTP Pronto e Ouvindo em http://${host_name}:${port}`);
+    });
+
+    const spa: Application = await createSPAExpressApplication();
+    logger.ok(`SPA - Aplicação Express Instanciada e Configurada`);
+    const httpServerSPA = await createHTTPServer(spa);
+    logger.ok('SPA - Servidor HTTP para  Instanciado e Configurado');
+    httpServerSPA.listen({ port: 5400 }, async () => {
+        logger.ok(`SPA - Servidor HTTP Pronto e Ouvindo em http://${host_name}:5400`);
     });
 
     prisma.$connect().then(
