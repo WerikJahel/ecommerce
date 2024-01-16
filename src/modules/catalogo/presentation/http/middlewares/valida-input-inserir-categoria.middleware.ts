@@ -1,7 +1,9 @@
+import { HttpErrors } from "@shared/presentation/http/http.error";
 import { NextFunction, Request, Response } from "express";
 import { z, ZodSchema } from "zod";
+import { fromZodError } from 'zod-validation-error';
 
-const InserirCategoriaSchema = z.object(
+const inserirCategoriaSchema = z.object(
     {
         nome: z.string().min(3).max(50)
     }
@@ -12,10 +14,11 @@ const validaInputInserirCategoriaMiddleware = (
     response: Response,
     next: NextFunction) => {
     try {
-        InserirCategoriaSchema.parse(request.body);
+        inserirCategoriaSchema.parse(request.body);
         next();
-    } catch (error) {
-        ;
+    } catch (error: any) {
+        const validationError = fromZodError(error);
+        error = new HttpErrors.BadRequestError({ message: validationError.message });
         next(error);
     }
 }
