@@ -34,7 +34,7 @@ const colors = Object.fromEntries(Object.keys(LevelsRecord).map(key => [key, Lev
 const emojis = Object.fromEntries(Object.keys(LevelsRecord).map(key => [key, LevelsRecord[key as LevelName].emoji]));
 
 //Este método define a gravidade atual com base no NODE_ENV atual
-//Mostra todos os níveis de log se o servidor estiver executando em modo de desenvolvimento;
+//Mostra todos os níveis de log se o servidor estiver executando em modo de desenvolvimento; 
 //Se está sendo executado em produção, mostra apenas mensagens de advertência e erro.
 const level = () => {
     const env = process.env.NODE_ENV || 'development'
@@ -58,7 +58,7 @@ const printfConsole = winston.format.printf(
         const cleanLevel = level.replace(/\u001b\[.*?m/g, '');
         const emoji = emojis[cleanLevel as keyof typeof emojis];
         const cleanEmoji = emoji.replace(/\u001b\[.*?m/g, '');
-        return `[${timestamp}][${process.env.API_NAME}] ${cleanEmoji} ${message}`;
+        return `[${process.env.API_NAME}] ${cleanEmoji} ${message}`;
     },
 );
 

@@ -18,4 +18,4 @@ const customMorganMiddleware = morgan(
     { stream, skip }
 );
 
-export { customMorganMiddleware }
+export { customMorganMiddleware as customMorgan }

@@ -3,7 +3,7 @@ import { apiv1Router } from "./rest/api.v1";
 import morgan from "morgan";
 import helmet from "helmet";
 import compression from "compression";
-import { customMorganMiddleware } from "./middlewares/custom-morgan.middleware";
+import { customMorgan } from "./middlewares/custom-morgan.middleware";
 import { logger } from "@shared/helpers/logger.winston";
 import { errorLogger } from "./middlewares/error-logger.middleware";
 import { errorResponder } from "./middlewares/error-responser.middleware";
@@ -22,7 +22,7 @@ const createExpressApplication = async (): Promise<Application> => {
     app.use(compression());
 
     //Middleware Customizados
-    app.use(customMorganMiddleware);
+    app.use(customMorgan);
 
     //Middlewares de Rotas
     app.use('/api/v1', apiv1Router);
