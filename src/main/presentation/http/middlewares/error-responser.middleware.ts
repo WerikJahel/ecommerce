@@ -1,7 +1,6 @@
 import { HttpError } from "@shared/presentation/http/http.error";
 import { NextFunction, Request, Response } from "express";
 
-
 const errorResponderMiddleware = (error: HttpError, request: Request, response: Response, next: NextFunction) => {
     let statusCode = error.statusCode || 500;
     response.status(statusCode).json({
